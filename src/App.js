@@ -8,6 +8,7 @@ import authGuard from './authGuard';
 import Login from '@/views/Login';
 import Register from '@/views/Register';
 import Home from '@/views/Home';
+import Courses from '@/views/Courses';
 
 import '@/styles/App.scss';
 import { ToastContainer } from 'react-toastify';
@@ -39,6 +40,13 @@ function App() {
               exact
               component={Home}
               title="خانه"
+              meta={{ auth: true }}
+            />
+
+            <LayoutResolver
+              path="/courses"
+              component={Courses}
+              title="انتخاب واحد"
               meta={{ auth: true }}
             />
           </Switch>

@@ -39,11 +39,7 @@ const Header = () => {
             ))}
 
           <li className="nav-item mr-auto">
-            <HeaderLink
-              label="خروج"
-              icon="log-out"
-              className="text-danger d-flex align-items-center"
-            />
+            <HeaderLink label="خروج" icon="log-out" className="text-danger" />
           </li>
         </ul>
       </nav>
