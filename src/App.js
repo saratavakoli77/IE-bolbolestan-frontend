@@ -16,10 +16,20 @@ function App() {
     <Provider store={store}>
       <Router>
         <Switch>
-          <LayoutResolver path="/login" component={Login} layout="auth" />
-          <LayoutResolver path="/register" component={Register} layout="auth" />
+          <LayoutResolver
+            path="/login"
+            component={Login}
+            layout="auth"
+            title="ورود"
+          />
+          <LayoutResolver
+            path="/register"
+            component={Register}
+            layout="auth"
+            title="ثبت نام"
+          />
 
-          <LayoutResolver path="/" exact component={Home} />
+          <LayoutResolver path="/" exact component={Home} title="خانه" />
         </Switch>
       </Router>
 
