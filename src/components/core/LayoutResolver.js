@@ -1,5 +1,4 @@
-import { Route } from 'react-router-dom';
-
+import { GuardedRoute } from 'react-router-guards';
 import AuthLayout from '@/layouts/Auth';
 import DefaultLayout from '@/layouts/Default';
 import { useEffect } from 'react';
@@ -15,11 +14,11 @@ const LayoutResolver = ({ component: Component, layout, title, ...props }) => {
   }, [title]);
 
   return (
-    <Route {...props}>
+    <GuardedRoute {...props}>
       <ActiveLayout>
         <Component />
       </ActiveLayout>
-    </Route>
+    </GuardedRoute>
   );
 };
 
