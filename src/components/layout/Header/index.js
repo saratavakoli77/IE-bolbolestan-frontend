@@ -2,7 +2,10 @@ import HeaderLink from './HeaderLink';
 import AppLogo from '@/components/shared/AppLogo';
 
 import './styles.scss';
-import { useRouteMatch } from 'react-router';
+import { useHistory, useRouteMatch } from 'react-router';
+import $api from '@/api';
+import { useDispatch } from 'react-redux';
+import { logout } from '@/store/slices/userSlice';
 
 const links = [
   {
@@ -20,7 +23,15 @@ const links = [
 ];
 
 const Header = () => {
-  let match = useRouteMatch();
+  const match = useRouteMatch();
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  const onLogout = () => {
+    $api.auth.logout();
+    dispatch(logout());
+    history.push('/login');
+  };
 
   return (
     <header className="header sticky-top bg-white">
@@ -39,7 +50,12 @@ const Header = () => {
             ))}
 
           <li className="nav-item mr-auto">
-            <HeaderLink label="خروج" icon="log-out" className="text-danger" />
+            <HeaderLink
+              label="خروج"
+              icon="log-out"
+              className="text-danger"
+              onClick={onLogout}
+            />
           </li>
         </ul>
       </nav>
