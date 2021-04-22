@@ -7,7 +7,7 @@ const HomeProfile = () => {
   const user = useSelector((state) => state.user.user);
 
   return (
-    <div className="pt-4 pb-5 text-center">
+    <div className="pt-4 pb-5 text-center mb-5">
       <HomeProfileAvatar avatar={user.img} />
       <ul className="mt-5 mb-3 ">
         <HomeProfileItem

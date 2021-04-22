@@ -2,25 +2,41 @@ import HeaderLink from './HeaderLink';
 import AppLogo from '@/components/shared/AppLogo';
 
 import './styles.scss';
+import { useRouteMatch } from 'react-router';
+
+const links = [
+  {
+    to: '/',
+    label: 'خانه',
+  },
+  {
+    to: '/courses',
+    label: 'انتخاب واحد',
+  },
+  {
+    to: '/schedule',
+    label: 'برنامه هفتگی',
+  },
+];
 
 const Header = () => {
+  let match = useRouteMatch();
+
   return (
     <header className="header sticky-top bg-white">
       <nav className="container">
         <ul className="nav align-items-center">
-          <li className="nav-item">
-            <HeaderLink link="/">
-              <AppLogo />
-            </HeaderLink>
-          </li>
+          <HeaderLink to="/">
+            <AppLogo />
+          </HeaderLink>
 
-          <li className="nav-item">
-            <HeaderLink link="/courses" label="انتخاب واحد" />
-          </li>
-
-          <li className="nav-item">
-            <HeaderLink link="/schedule" label="برنامه هفتگی" />
-          </li>
+          {links
+            .filter((l) => l.to !== match.path)
+            .map((l, indx) => (
+              <li className="nav-item" key={indx}>
+                <HeaderLink to={l.to} label={l.label} />
+              </li>
+            ))}
 
           <li className="nav-item mr-auto">
             <HeaderLink

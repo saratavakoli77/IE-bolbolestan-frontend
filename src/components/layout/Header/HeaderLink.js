@@ -1,8 +1,8 @@
 import AppIcon from '@/components/shared/AppIcon';
 
-const HeaderLink = ({ label, icon = '', link, children, className = '' }) => {
+const HeaderLink = ({ label, icon = '', to, children, className = '' }) => {
   return (
-    <a href={link} className={`nav-link ${className}`}>
+    <a href={to} className={`nav-link ${className}`}>
       {label ? label : children}
       {icon && <AppIcon icon={icon} className="mr-2" />}
     </a>
