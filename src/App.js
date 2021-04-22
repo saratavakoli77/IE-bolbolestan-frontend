@@ -24,12 +24,14 @@ function App() {
               component={Login}
               layout="auth"
               title="ورود"
+              meta={{ guest: true }}
             />
             <LayoutResolver
               path="/register"
               component={Register}
               layout="auth"
               title="ثبت نام"
+              meta={{ guest: true }}
             />
 
             <LayoutResolver

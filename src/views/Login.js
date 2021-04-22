@@ -25,8 +25,8 @@ const Login = () => {
 
     try {
       await $api.auth.login(studentId);
-      const { student } = await $api.auth.fetchProfile();
-      dispatch(setUser(student));
+      const { student, gpa, tpu, courses } = await $api.auth.fetchProfile();
+      dispatch(setUser({ ...student, gpa, tpu, courses }));
       history.push('/');
     } catch (err) {
       toast.error(err.message);
