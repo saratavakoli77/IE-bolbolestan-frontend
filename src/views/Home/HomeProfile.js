@@ -1,3 +1,4 @@
+import InfoBox from '@/components/shared/InfoBox';
 import { useSelector } from 'react-redux';
 import HomeProfileAvatar from './HomeProfileAvatar';
 import HomeProfileItem from './HomeProfileItem';
@@ -21,6 +22,10 @@ const HomeProfile = () => {
         <HomeProfileItem label="رشته" value={user.field} />
         <HomeProfileItem label="مقطع" value={user.level} />
       </ul>
+
+      <InfoBox variant="primary" outlined>
+        {user.status}
+      </InfoBox>
     </div>
   );
 };
