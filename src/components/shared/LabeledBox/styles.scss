@@ -1,0 +1,37 @@
+.labeled-box {
+  border: 2px solid var(--color-primary-light);
+  padding: 2rem;
+  position: relative;
+  border-radius: 5px;
+
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+
+  &__label {
+    position: absolute;
+    top: -1rem;
+    right: 2rem;
+    background: var(--color-primary-light);
+    color: var(--color-white);
+    padding: 0.3rem 0.8rem;
+    border-radius: 10px;
+  }
+
+  &__footer {
+    border-top: 2px solid var(--color-primary-light);
+    padding: 0.7rem 2rem;
+
+    margin: 0 -2rem -2rem;
+  }
+
+  &__header {
+    border-bottom: 2px solid var(--color-primary);
+    margin: 0 -2rem;
+    padding: 2rem;
+  }
+
+  &__content {
+    margin: 0 -2rem;
+  }
+}
