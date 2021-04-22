@@ -1,5 +1,6 @@
 import './styles.scss';
 import HomeProfile from './HomeProfile';
+import HomeReportsList from './HomeReportsList';
 
 const Home = () => (
   <div>
@@ -9,7 +10,9 @@ const Home = () => (
         <aside className="col-3 profile">
           <HomeProfile />
         </aside>
-        <main className="col-9 p-5 mb-5"></main>
+        <main className="col-9 p-5 mb-5">
+          <HomeReportsList />
+        </main>
       </div>
     </div>
   </div>

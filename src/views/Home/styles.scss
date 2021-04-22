@@ -21,3 +21,37 @@
     margin-bottom: 1rem;
   }
 }
+
+.report__item {
+  display: grid;
+  grid-template-columns: 5% 20% 30% 15% 20% 10%;
+  border: 1px solid var(--color-primary);
+  border-radius: 5px;
+}
+
+.report__item:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+.report__cell {
+  padding: 0.2rem 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.report__cell:not(:last-child) {
+  border-left: 1px solid var(--color-primary);
+}
+
+.row-number {
+  color: var(--color-primary);
+  font-weight: 900;
+}
+
+@media screen and (max-width: 1300px) {
+  .report__cell {
+    padding: 0.2rem 0.4rem;
+  }
+}
