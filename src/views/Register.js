@@ -1,3 +1,88 @@
-const Register = () => <div className="Register">Register</div>;
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
+import { Formik } from 'formik';
+import * as yup from 'yup';
+import AppInput from '@/components/shared/AppInput';
+
+const formSchema = yup.object().shape({
+  firstName: yup.string().required(),
+  lastName: yup.string().required(),
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+});
+
+const Register = () => {
+  return (
+    <main>
+      <h4 className="mb-4 font-weight-bold">ایجاد حساب کاربری</h4>
+
+      <Formik
+        validationSchema={formSchema}
+        initialValues={{
+          firstName: '',
+          lastName: '',
+          email: '',
+          password: '',
+        }}
+        onSubmit={console.log}
+      >
+        {({ handleSubmit, handleChange, values, touched, errors, isValid }) => (
+          <Form noValidate onSubmit={handleSubmit}>
+            <AppInput
+              name="firstName"
+              placeholder="نام خود را وارد کنید"
+              value={values.firstName}
+              onChange={handleChange}
+              isValid={touched.firstName && !errors.firstName}
+              isInvalid={!!errors.firstName}
+              errMessage="این فیلد اجباری می‌باشد"
+            />
+
+            <AppInput
+              name="lastName"
+              placeholder="نام خانوادگی خود را وارد کنید"
+              value={values.lastName}
+              onChange={handleChange}
+              isValid={touched.lastName && !errors.lastName}
+              isInvalid={!!errors.lastName}
+              errMessage="این فیلد اجباری می‌باشد"
+            />
+
+            <AppInput
+              name="email"
+              placeholder="ایمیل خود را وارد کنید"
+              value={values.email}
+              onChange={handleChange}
+              isValid={touched.email && !errors.email}
+              isInvalid={!!errors.email}
+              errMessage="ایمیل خود را به درستی وارد کنید"
+            />
+
+            <AppInput
+              name="password"
+              type="password"
+              placeholder="رمز عبور خود را وارد کنید"
+              value={values.password}
+              onChange={handleChange}
+              isValid={touched.password && !errors.password}
+              isInvalid={!!errors.password}
+              errMessage="این فیلد اجباری می‌باشد"
+            />
+
+            <Button
+              variant="primary"
+              block
+              className="mt-5"
+              type="submit"
+              disabled={!isValid}
+            >
+              ثبت نام
+            </Button>
+          </Form>
+        )}
+      </Formik>
+    </main>
+  );
+};
 
 export default Register;

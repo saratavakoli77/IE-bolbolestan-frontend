@@ -9,6 +9,7 @@ import { toast } from 'react-toastify';
 import { setUser } from '@/store/slices/userSlice';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import AppInput from '@/components/shared/AppInput';
 
 const formSchema = yup.object().shape({
   studentId: yup.number().required(),
@@ -47,31 +48,22 @@ const Login = () => {
       >
         {({ handleSubmit, handleChange, values, touched, errors, isValid }) => (
           <Form noValidate onSubmit={handleSubmit}>
-            <Form.Group controlId="studentId">
-              <Form.Label>شماره دانشجویی</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="شماره دانشجویی خود را وارد کنید"
-                name="studentId"
-                value={values.studentId}
-                onChange={handleChange}
-                isValid={touched.studentId && !errors.studentId}
-                isInvalid={!!errors.studentId}
-              />
-              {errors.studentId && (
-                <Form.Control.Feedback type="invalid">
-                  لطفا شماره دانشجویی خود را وارد کنید
-                </Form.Control.Feedback>
-              )}
-            </Form.Group>
-            <Form.Group controlId="password">
-              <Form.Label>رمز عبور</Form.Label>
-              <Form.Control
-                type="password"
-                name="password"
-                placeholder="رمز عبور خود را وارد کنید"
-              />
-            </Form.Group>
+            <AppInput
+              name="studentId"
+              placeholder="شماره دانشجویی خود را وارد کنید"
+              value={values.studentId}
+              onChange={handleChange}
+              isValid={touched.studentId && !errors.studentId}
+              isInvalid={!!errors.studentId}
+              errMessage="این فیلد اجباری می‌باشد"
+            />
+            <AppInput
+              name="password"
+              type="password"
+              placeholder="رمز عبور خود را وارد کنید"
+              value={values.password}
+              onChange={handleChange}
+            />
             <Button
               variant="primary"
               block
