@@ -8,6 +8,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import { toast } from 'react-toastify';
 import { setUser } from '@/store/slices/userSlice';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const formSchema = yup.object().shape({
   studentId: yup.number().required(),
@@ -15,6 +16,7 @@ const formSchema = yup.object().shape({
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
   const history = useHistory();
 
   const onSubmit = async ({ studentId }) => {
@@ -23,11 +25,10 @@ const Login = () => {
     try {
       await $api.auth.login(studentId);
       const { student } = await $api.auth.fetchProfile();
-      setUser(student);
+      dispatch(setUser(student));
       history.push('/');
     } catch (err) {
       toast.error(err.message);
-    } finally {
       setLoading(false);
     }
   };
