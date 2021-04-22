@@ -1,0 +1,150 @@
+/*
+** TABLE
+*/
+
+.table th,
+.table td {
+  text-align: center;
+  border-color: var(--color-gray-dark);
+  padding: 0.4rem;
+  vertical-align: middle;
+}
+
+.table thead th {
+  border-bottom: 1px solid var(--color-gray-dark);
+  color: var(--color-primary-dark);
+  padding: 1rem 0.4rem;
+}
+
+.table tbody td {
+  color: var(--color-gray);
+}
+
+/*
+** SELECTED-COURSES
+*/
+
+.selected-courses__remove {
+  font-size: 1.5rem;
+}
+
+/*
+** SEARCH BOX
+*/
+
+.search-box {
+  border: 1px solid var(--color-gray);
+  padding: 1rem 2.5rem;
+  border-radius: 5px;
+}
+
+.search-box__input {
+  width: 15rem;
+  margin-left: 1rem;
+  border: 1px solid var(--color-gray);
+  background: var(--color-gray-x-light);
+  color: var(--color-gray);
+  border-radius: 5px;
+  padding: 0.3rem 0.7rem;
+}
+
+.search-box__input:focus {
+  outline: none;
+}
+
+.search-box__input::placeholder {
+  text-align: center;
+}
+
+/*
+** COURSE-FILTER
+*/
+
+.course-filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.course-filters__item {
+  flex-grow: 1;
+  flex-shrink: 0;
+  border: 1px solid var(--color-gray);
+  border-radius: 5px;
+  font-weight: bold;
+  background: var(--color-white);
+  padding: 0.5rem 1.5rem;
+  color: var(--color-gray);
+  text-align: center;
+}
+
+.course-filters__item--active {
+  background: var(--color-primary-x-light);
+  border-color: var(--color-primary-x-light);
+}
+
+.course-filters__item:not(:last-child) {
+  margin-left: 1rem;
+}
+
+/*
+** ALL-COURSES-TABLE
+*/
+
+.all-courses-table {
+  border: 0;
+}
+
+.all-courses-table thead th {
+  border: 0;
+  border-bottom: 2px solid var(--color-primary-light);
+  padding: 1.2rem 0.75rem;
+}
+
+.all-courses-table td:last-child {
+  border-left: 0;
+}
+
+.all-courses-table td:first-child {
+  border-right: 0;
+}
+
+.all-courses-table th:first-child,
+.all-courses-table td:first-child {
+  width: 70px;
+}
+
+.all-courses-table th:nth-child(4),
+.all-courses-table td:nth-child(4) {
+  width: 100px;
+}
+
+.all-courses-table tbody td {
+  border-top: 1px solid var(--color-gray);
+}
+
+.all-courses-table tbody td:not(:last-child) {
+  border-left: 1px solid var(--color-gray);
+}
+
+.all-courses-table tbody td:last-child {
+  border-bottom: 0 !important;
+  border-top: 0 !important;
+}
+
+.all-courses-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.all-courses-table tbody tr:hover td,
+.all-courses-table tbody tr:hover + tr td {
+  border-top-color: var(--color-primary);
+}
+
+.all-courses-table tbody tr:hover td:first-child {
+  border-right: 4px solid var(--color-primary);
+}
+
+.all-courses-table tbody tr:hover td:nth-child(7) {
+  border-left-color: var(--color-primary);
+}

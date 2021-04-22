@@ -1,3 +1,4 @@
+import '@/styles/App.scss';
 import { BrowserRouter, Switch } from 'react-router-dom';
 import store from './store';
 import { Provider } from 'react-redux';
@@ -10,7 +11,6 @@ import Register from '@/views/Register';
 import Home from '@/views/Home';
 import Courses from '@/views/Courses';
 
-import '@/styles/App.scss';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

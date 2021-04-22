@@ -1,8 +1,9 @@
-import { authModule } from './modules';
+import { authModuleFactory, coursesModuleFactory } from './modules';
 import $http from './httpClient';
 
 const $api = {
-  auth: authModule({ $http }),
+  auth: authModuleFactory({ $http }),
+  courses: coursesModuleFactory({ $http }),
 };
 
 export default $api;

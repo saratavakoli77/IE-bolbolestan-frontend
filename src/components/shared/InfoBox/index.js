@@ -6,11 +6,12 @@ const InfoBox = ({
   children,
   className = '',
   outlined,
+  block,
 }) => (
   <Tag
     className={`info-box info-box--${variant} ${
       outlined && 'info-box--outlined'
-    } ${className}`}
+    } ${block && 'info-box--block'} ${className}`}
   >
     {children}
   </Tag>
