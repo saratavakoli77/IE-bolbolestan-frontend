@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import AppInput from '@/components/shared/AppInput';
+import { Link } from 'react-router-dom';
 
 const formSchema = yup.object().shape({
   firstName: yup.string().required(),
@@ -34,7 +35,7 @@ const Register = () => {
               value={values.firstName}
               onChange={handleChange}
               isValid={touched.firstName && !errors.firstName}
-              isInvalid={!!errors.firstName}
+              isInvalid={touched.firstName && !!errors.firstName}
               errMessage="این فیلد اجباری می‌باشد"
             />
 
@@ -44,7 +45,7 @@ const Register = () => {
               value={values.lastName}
               onChange={handleChange}
               isValid={touched.lastName && !errors.lastName}
-              isInvalid={!!errors.lastName}
+              isInvalid={touched.lastName && !!errors.lastName}
               errMessage="این فیلد اجباری می‌باشد"
             />
 
@@ -54,7 +55,7 @@ const Register = () => {
               value={values.email}
               onChange={handleChange}
               isValid={touched.email && !errors.email}
-              isInvalid={!!errors.email}
+              isInvalid={touched.email && !!errors.email}
               errMessage="ایمیل خود را به درستی وارد کنید"
             />
 
@@ -65,7 +66,7 @@ const Register = () => {
               value={values.password}
               onChange={handleChange}
               isValid={touched.password && !errors.password}
-              isInvalid={!!errors.password}
+              isInvalid={touched.password && !!errors.password}
               errMessage="این فیلد اجباری می‌باشد"
             />
 
@@ -81,6 +82,10 @@ const Register = () => {
           </Form>
         )}
       </Formik>
+
+      <div className="text-center mt-3">
+        <Link to="/login">ورود به حساب کاربری</Link>
+      </div>
     </main>
   );
 };

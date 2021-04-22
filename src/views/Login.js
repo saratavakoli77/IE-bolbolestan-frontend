@@ -7,7 +7,7 @@ import { useState } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
 import { toast } from 'react-toastify';
 import { setUser } from '@/store/slices/userSlice';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import AppInput from '@/components/shared/AppInput';
 
@@ -54,7 +54,7 @@ const Login = () => {
               value={values.studentId}
               onChange={handleChange}
               isValid={touched.studentId && !errors.studentId}
-              isInvalid={!!errors.studentId}
+              isInvalid={touched.studentId && !!errors.studentId}
               errMessage="این فیلد اجباری می‌باشد"
             />
             <AppInput
@@ -86,6 +86,10 @@ const Login = () => {
           </Form>
         )}
       </Formik>
+
+      <div className="text-center mt-3">
+        <Link to="/register">ایجاد حساب کاربری</Link>
+      </div>
     </main>
   );
 };
