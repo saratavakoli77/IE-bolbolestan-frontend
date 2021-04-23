@@ -13,47 +13,57 @@ import Courses from '@/views/Courses';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import LoadingContext from '@/contexts/loading';
+import { useState } from 'react';
+import AppLoading from '@/components/core/AppLoading';
 
 function App() {
+  const [loading, setLoading] = useState(false);
+  const showLoading = () => setLoading(true);
+  const hideLoading = () => setLoading(false);
+
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <GuardProvider guards={[authGuard]}>
-          <Switch>
-            <LayoutResolver
-              path="/login"
-              component={Login}
-              layout="auth"
-              title="ورود"
-              meta={{ guest: true }}
-            />
-            <LayoutResolver
-              path="/register"
-              component={Register}
-              layout="auth"
-              title="ثبت نام"
-              meta={{ guest: true }}
-            />
+      <LoadingContext.Provider value={{ loading, showLoading, hideLoading }}>
+        <BrowserRouter>
+          <GuardProvider guards={[authGuard]}>
+            <Switch>
+              <LayoutResolver
+                path="/login"
+                component={Login}
+                layout="auth"
+                title="ورود"
+                meta={{ guest: true }}
+              />
+              <LayoutResolver
+                path="/register"
+                component={Register}
+                layout="auth"
+                title="ثبت نام"
+                meta={{ guest: true }}
+              />
 
-            <LayoutResolver
-              path="/"
-              exact
-              component={Home}
-              title="خانه"
-              meta={{ auth: true }}
-            />
+              <LayoutResolver
+                path="/"
+                exact
+                component={Home}
+                title="خانه"
+                meta={{ auth: true }}
+              />
 
-            <LayoutResolver
-              path="/courses"
-              component={Courses}
-              title="انتخاب واحد"
-              meta={{ auth: true }}
-            />
-          </Switch>
-        </GuardProvider>
-      </BrowserRouter>
+              <LayoutResolver
+                path="/courses"
+                component={Courses}
+                title="انتخاب واحد"
+                meta={{ auth: true }}
+              />
+            </Switch>
+          </GuardProvider>
+        </BrowserRouter>
 
-      <ToastContainer />
+        <ToastContainer />
+        {loading && <AppLoading />}
+      </LoadingContext.Provider>
     </Provider>
   );
 }
