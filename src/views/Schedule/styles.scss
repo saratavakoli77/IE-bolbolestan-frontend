@@ -1,0 +1,332 @@
+.schedule {
+  border: 1px solid var(--color-primary);
+  border-radius: 10px;
+}
+
+.schedule__head {
+  border-bottom: 1px solid var(--color-primary);
+}
+
+.schedule__icon {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+}
+
+.schedule__grid--main {
+  display: grid;
+  padding-top: 40px;
+  grid-template-columns: 100px repeat(6, 1fr);
+
+  grid-template-areas:
+    'st sat sun mon tue wed thu'
+    'a .... .... .... .... .... ....'
+    'b .... .... .... .... .... ....'
+    'c .... .... .... .... .... ....'
+    'd .... .... .... .... .... ....'
+    'e .... .... .... .... .... ....'
+    'f .... .... .... .... .... ....'
+    'g .... .... .... .... .... ....'
+    'h .... .... .... .... .... ....'
+    'i .... .... .... .... .... ....'
+    'j .... .... .... .... .... ....'
+    'k .... .... .... .... .... ....'
+    'l .... .... .... .... .... ....'
+    'm .... .... .... .... .... ....'
+    'n .... .... .... .... .... ....'
+    'o .... .... .... .... .... ....'
+    'p .... .... .... .... .... ....'
+    'q .... .... .... .... .... ....'
+    'r .... .... .... .... .... ....'
+    's .... .... .... .... .... ....'
+    't .... .... .... .... .... ....'
+    'u .... .... .... .... .... ....'
+    'v .... .... .... .... .... ....';
+}
+
+.schedule__grid--days {
+  display: grid;
+  /* height: px; */
+  border-bottom: 1px solid var(--color-gray-light);
+  grid-template-columns: 100px repeat(6, 1fr);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  grid-template-areas: 'st sat sun mon tue wed thu';
+}
+
+.schedule__day {
+  grid-row: st-start / st-end;
+  text-align: center;
+}
+
+.schedule__day:not(:last-child) {
+  border-left: 1px solid var(--color-gray-light);
+}
+
+.schedule__day p {
+  border-bottom: 1px solid var(--color-gray-light);
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.schedule__time {
+  grid-column: st-start / fri-end;
+  height: 60px;
+  text-align: right;
+  display: flex;
+  align-items: center;
+}
+
+.schedule__time p {
+  width: 100px;
+  text-align: center;
+}
+
+.schedule__time:not(:last-child) {
+  border-bottom: 1px solid var(--color-gray-light);
+}
+
+.schedule__cell[data-h-start='7'] {
+  grid-row-start: a-start;
+}
+.schedule__cell[data-h-start='7:30'] {
+  grid-row-start: b-start;
+}
+
+.schedule__cell[data-h-start='8'] {
+  grid-row-start: c-start;
+}
+.schedule__cell[data-h-start='8:30'] {
+  grid-row-start: d-start;
+}
+
+.schedule__cell[data-h-start='9'] {
+  grid-row-start: e-start;
+}
+.schedule__cell[data-h-start='9:30'] {
+  grid-row-start: f-start;
+}
+
+.schedule__cell[data-h-start='10'] {
+  grid-row-start: g-start;
+}
+.schedule__cell[data-h-start='10:30'] {
+  grid-row-start: h-start;
+}
+
+.schedule__cell[data-h-start='11'] {
+  grid-row-start: i-start;
+}
+.schedule__cell[data-h-start='11:30'] {
+  grid-row-start: j-start;
+}
+
+.schedule__cell[data-h-start='12'] {
+  grid-row-start: k-start;
+}
+.schedule__cell[data-h-start='12:30'] {
+  grid-row-start: l-start;
+}
+
+.schedule__cell[data-h-start='13'] {
+  grid-row-start: m-start;
+}
+.schedule__cell[data-h-start='13:30'] {
+  grid-row-start: n-start;
+}
+
+.schedule__cell[data-h-start='14'] {
+  grid-row-start: o-start;
+}
+.schedule__cell[data-h-start='14:30'] {
+  grid-row-start: p-start;
+}
+
+.schedule__cell[data-h-start='15'] {
+  grid-row-start: q-start;
+}
+.schedule__cell[data-h-start='15:30'] {
+  grid-row-start: r-start;
+}
+
+.schedule__cell[data-h-start='16'] {
+  grid-row-start: s-start;
+}
+.schedule__cell[data-h-start='16:30'] {
+  grid-row-start: t-start;
+}
+
+.schedule__cell[data-h-start='17'] {
+  grid-row-start: u-start;
+}
+.schedule__cell[data-h-start='17:30'] {
+  grid-row-start: v-start;
+}
+
+.schedule__cell[data-h-end='7:30'] {
+  grid-row-end: a-end;
+}
+.schedule__cell[data-h-end='8'] {
+  grid-row-end: b-end;
+}
+.schedule__cell[data-h-end='8:30'] {
+  grid-row-end: c-end;
+}
+.schedule__cell[data-h-end='9'] {
+  grid-row-end: d-end;
+}
+.schedule__cell[data-h-end='9:30'] {
+  grid-row-end: e-end;
+}
+.schedule__cell[data-h-end='10'] {
+  grid-row-end: f-end;
+}
+.schedule__cell[data-h-end='10:30'] {
+  grid-row-end: g-end;
+}
+.schedule__cell[data-h-end='11'] {
+  grid-row-end: h-end;
+}
+.schedule__cell[data-h-end='11:30'] {
+  grid-row-end: i-end;
+}
+.schedule__cell[data-h-end='12'] {
+  grid-row-end: j-end;
+}
+.schedule__cell[data-h-end='12:30'] {
+  grid-row-end: k-end;
+}
+.schedule__cell[data-h-end='13'] {
+  grid-row-end: l-end;
+}
+.schedule__cell[data-h-end='13:30'] {
+  grid-row-end: m-end;
+}
+.schedule__cell[data-h-end='14'] {
+  grid-row-end: n-end;
+}
+.schedule__cell[data-h-end='14:30'] {
+  grid-row-end: o-end;
+}
+.schedule__cell[data-h-end='15'] {
+  grid-row-end: p-end;
+}
+.schedule__cell[data-h-end='15:30'] {
+  grid-row-end: q-end;
+}
+.schedule__cell[data-h-end='16'] {
+  grid-row-end: r-end;
+}
+.schedule__cell[data-h-end='16:30'] {
+  grid-row-end: s-end;
+}
+.schedule__cell[data-h-end='17'] {
+  grid-row-end: t-end;
+}
+.schedule__cell[data-h-end='17:30'] {
+  grid-row-end: u-end;
+}
+.schedule__cell[data-h-end='18'] {
+  grid-row-end: v-end;
+}
+
+.schedule__cell[data-day='sat'] {
+  grid-column: sat-start / sat-end;
+}
+.schedule__cell[data-day='sun'] {
+  grid-column: sun-start / sun-end;
+}
+.schedule__cell[data-day='mon'] {
+  grid-column: mon-start / mon-end;
+}
+.schedule__cell[data-day='tue'] {
+  grid-column: tue-start / tue-end;
+}
+.schedule__cell[data-day='wed'] {
+  grid-column: wed-start / wed-end;
+}
+.schedule__cell[data-day='thu'] {
+  grid-column: thu-start / thu-end;
+}
+
+.schedule__course {
+  margin: 4px;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.schedule__course::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  opacity: 0.4;
+}
+
+.schedule__course[data-type='main'] {
+  border-right: 3px solid var(--color-danger);
+}
+.schedule__course[data-type='main']::before {
+  background: var(--color-danger);
+}
+
+.schedule__course[data-type='dedicated'] {
+  border-right: 3px solid var(--color-primary);
+}
+.schedule__course[data-type='dedicated']::before {
+  background: var(--color-primary);
+}
+
+.schedule__course[data-type='general'] {
+  border-right: 3px solid var(--color-yellow);
+}
+.schedule__course[data-type='general']::before {
+  background: var(--color-yellow);
+}
+
+.schedule__course[data-type='base'] {
+  border-right: 3px solid var(--color-success);
+}
+.schedule__course[data-type='base']::before {
+  background: var(--color-success);
+}
+
+@media screen and (max-width: 550px) {
+  body {
+    font-size: 12px;
+  }
+
+  .schedule__course {
+    font-size: 12px;
+  }
+
+  .schedule__grid--days {
+    grid-template-columns: 70px repeat(6, 80px);
+  }
+
+  .schedule__grid--main {
+    grid-template-columns: 70px repeat(6, 80px);
+  }
+
+  .schedule__wrapper {
+    overflow-x: scroll;
+  }
+
+  .schedule__time p {
+    width: 70px;
+  }
+}

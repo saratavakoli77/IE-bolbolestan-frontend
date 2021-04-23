@@ -16,6 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import LoadingContext from '@/contexts/loading';
 import { useState } from 'react';
 import AppLoading from '@/components/core/AppLoading';
+import Schedule from './views/Schedule';
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -42,7 +43,6 @@ function App() {
                 title="ثبت نام"
                 meta={{ guest: true }}
               />
-
               <LayoutResolver
                 path="/"
                 exact
@@ -50,11 +50,16 @@ function App() {
                 title="خانه"
                 meta={{ auth: true }}
               />
-
               <LayoutResolver
                 path="/courses"
                 component={Courses}
                 title="انتخاب واحد"
+                meta={{ auth: true }}
+              />
+              <LayoutResolver
+                path="/schedule"
+                component={Schedule}
+                title="برنامه هفتگی"
                 meta={{ auth: true }}
               />
             </Switch>
