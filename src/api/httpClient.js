@@ -1,3 +1,4 @@
+import wait from '@/utils/wait';
 import axios from 'axios';
 
 function transformErrResponse(err) {
@@ -22,16 +23,16 @@ class HttpClient {
     });
   }
 
-  get(endpoint) {
-    return this.$http
-      .get(endpoint)
+  get(endpoint, { sleep = 1 } = {}) {
+    return Promise.all([this.$http.get(endpoint), wait(sleep)])
+      .then(([res]) => res)
       .then(transformResponse)
       .catch(transformErrResponse);
   }
 
-  post(endpoint, payload = {}) {
-    return this.$http
-      .post(endpoint, payload)
+  post(endpoint, payload = {}, { sleep = 1 } = {}) {
+    return Promise.all([this.$http.post(endpoint, payload), wait(sleep)])
+      .then(([res]) => res)
       .then(transformResponse)
       .catch(transformErrResponse);
   }

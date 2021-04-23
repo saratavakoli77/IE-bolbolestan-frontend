@@ -4,6 +4,7 @@ import PickedCoursesList from './PickedCoursesList';
 import LabeledBox from '@/components/shared/LabeledBox';
 import { fetchPickedCourses } from '@/store/slices/coursesSlice';
 import { toast } from 'react-toastify';
+import PickedCoursesFooter from './PickedCoursesFooter';
 
 const PickedCourses = () => {
   const pickedCourses = useSelector((state) => state.courses.pickedCourses);
@@ -18,7 +19,11 @@ const PickedCourses = () => {
   }, [dispatch]);
 
   return (
-    <LabeledBox label="دروس انتخاب شده" className="mb-0">
+    <LabeledBox
+      label="دروس انتخاب شده"
+      className="mb-0"
+      footer={PickedCoursesFooter}
+    >
       {pickedCourses.length ? (
         <PickedCoursesList courses={pickedCourses} />
       ) : (

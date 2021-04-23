@@ -1,6 +1,12 @@
 import './styles.scss';
 
-const LabeledBox = ({ children, label, header: Header, className }) => (
+const LabeledBox = ({
+  children,
+  label,
+  header: Header,
+  className,
+  footer: Footer,
+}) => (
   <div className={`labeled-box ${className}`}>
     <p className="labeled-box__label">{label}</p>
 
@@ -11,6 +17,12 @@ const LabeledBox = ({ children, label, header: Header, className }) => (
     )}
 
     {children}
+
+    {Footer && (
+      <div class="labeled-box__footer">
+        <Footer />
+      </div>
+    )}
   </div>
 );
 
