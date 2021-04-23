@@ -1,3 +1,5 @@
+import AppBtn from '@/components/shared/AppBtn';
+import AppIcon from '@/components/shared/AppIcon';
 import InfoBox from '@/components/shared/InfoBox';
 import { mapCourseTypeToLabel } from './helpers';
 
@@ -17,13 +19,25 @@ const CoursesTableListItem = ({
   capacity,
   registered,
   type,
+  onPick,
 }) => {
+  const isFull = capacity === registered;
+  const icon = {
+    variant: isFull ? 'gray' : 'success-dark',
+    icon: isFull ? 'clock-circular-outline' : 'add',
+  };
+
   return (
     <tr>
       <td>
-        <button className="btn btn-gray btn--icon btn--small">
-          <i className="flaticon-clock-circular-outline"></i>
-        </button>
+        <AppBtn
+          variant={icon.variant}
+          small
+          icon
+          onClick={() => onPick(code, classCode)}
+        >
+          <AppIcon icon={icon.icon} />
+        </AppBtn>
       </td>
       <td>
         {code}-{classCode}

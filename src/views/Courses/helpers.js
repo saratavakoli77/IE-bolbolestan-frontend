@@ -4,3 +4,7 @@ export const mapCourseTypeToLabel = Object.freeze({
   Paaye: 'پایه',
   Takhasosi: 'اختصاصی',
 });
+
+export const genIdForCourse = ({ code, classCode }) => {
+  return code + classCode;
+};
