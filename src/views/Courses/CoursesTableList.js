@@ -1,7 +1,7 @@
+import $api from '@/api';
 import LoadingContext from '@/contexts/loading';
-import { fetchPickedCourses, pickCourse } from '@/store/slices/coursesSlice';
+import { fetchPickedCourses } from '@/store/slices/coursesSlice';
 import handleError from '@/utils/handleError';
-import { unwrapResult } from '@reduxjs/toolkit';
 import { useState } from 'react';
 import { useContext } from 'react';
 import { useEffect } from 'react';
@@ -36,12 +36,15 @@ const CoursesTableList = () => {
   const onPick = async (code, classCode) => {
     showLoading();
 
-    dispatch(pickCourse({ code, classCode }))
-      .then(unwrapResult)
-      .then(dispatch(fetchPickedCourses()))
-      .then(() => toast.success('عملیات با موفقیت انجام شد'))
-      .catch(handleError)
-      .finally(() => hideLoading());
+    try {
+      await $api.courses.pickCourse(code, classCode);
+      await dispatch(fetchPickedCourses());
+      toast.success('عملیات با موفقیت انجام شد');
+    } catch (err) {
+      handleError(err);
+    } finally {
+      hideLoading();
+    }
   };
 
   return (

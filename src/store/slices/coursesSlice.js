@@ -8,17 +8,6 @@ export const fetchPickedCourses = createAsyncThunk(
   }
 );
 
-export const pickCourse = createAsyncThunk(
-  'courses/pickCourse',
-  async ({ code, classCode }, { rejectWithValue }) => {
-    try {
-      return await $api.courses.pickCourse(code, classCode);
-    } catch (err) {
-      return rejectWithValue(err);
-    }
-  }
-);
-
 export const coursesSlice = createSlice({
   name: 'courses',
   initialState: {
