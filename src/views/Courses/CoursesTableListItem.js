@@ -7,7 +7,7 @@ import CoursesTableListItemTooltip from './CoursesTableListItemTooltip';
 import { useEffect } from 'react';
 
 const mapCourseTypeToInfoBoxVariant = {
-  Asli: 'success',
+  Asli: 'success-dark',
   Paaye: 'danger-filled',
   Umumi: 'yellow',
   Takhasosi: 'primary',
