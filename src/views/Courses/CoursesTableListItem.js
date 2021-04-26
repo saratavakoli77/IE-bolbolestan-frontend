@@ -3,7 +3,7 @@ import AppIcon from '@/components/shared/AppIcon';
 import InfoBox from '@/components/shared/InfoBox';
 import { genIdForCourse, mapCourseTypeToLabel } from './helpers';
 import ReactTooltip from 'react-tooltip';
-import CoursesListItemTooltip from './CoursesListItemTooltip';
+import CoursesTableListItemTooltip from './CoursesTableListItemTooltip';
 import { useEffect } from 'react';
 
 const mapCourseTypeToInfoBoxVariant = {
@@ -25,6 +25,8 @@ const CoursesTableListItem = ({
   onPick,
   classTimeDays,
   formattedClassDate,
+  examTimeStart,
+  examTimeEnd,
 }) => {
   const isFull = capacity === registered;
   const icon = {
@@ -76,7 +78,14 @@ const CoursesTableListItem = ({
           id={id}
           place="left"
         >
-          <CoursesListItemTooltip {...{ classTimeDays, formattedClassDate }} />
+          <CoursesTableListItemTooltip
+            {...{
+              classTimeDays,
+              formattedClassDate,
+              examTimeStart,
+              examTimeEnd,
+            }}
+          />
         </ReactTooltip>
       </td>
       <td></td>
