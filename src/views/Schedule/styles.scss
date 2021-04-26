@@ -277,31 +277,31 @@
   opacity: 0.4;
 }
 
-.schedule__course[data-type='main'] {
+.schedule__course[data-type='Paaye'] {
   border-right: 3px solid var(--color-danger);
 }
-.schedule__course[data-type='main']::before {
+.schedule__course[data-type='Paaye']::before {
   background: var(--color-danger);
 }
 
-.schedule__course[data-type='dedicated'] {
+.schedule__course[data-type='Takhasosi'] {
   border-right: 3px solid var(--color-primary);
 }
-.schedule__course[data-type='dedicated']::before {
+.schedule__course[data-type='Takhasosi']::before {
   background: var(--color-primary);
 }
 
-.schedule__course[data-type='general'] {
+.schedule__course[data-type='Umumi'] {
   border-right: 3px solid var(--color-yellow);
 }
-.schedule__course[data-type='general']::before {
+.schedule__course[data-type='Umumi']::before {
   background: var(--color-yellow);
 }
 
-.schedule__course[data-type='base'] {
+.schedule__course[data-type='Asli'] {
   border-right: 3px solid var(--color-success);
 }
-.schedule__course[data-type='base']::before {
+.schedule__course[data-type='Asli']::before {
   background: var(--color-success);
 }
 

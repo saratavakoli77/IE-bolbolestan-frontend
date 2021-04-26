@@ -1,4 +1,17 @@
 import AppIcon from '@/components/shared/AppIcon';
+import InfoBox from '@/components/shared/InfoBox';
+
+const statusTextMap = {
+  waiting: 'در انتظار',
+  finalized: 'ثبت نهایی',
+  'non-finalized': 'ثبت نهایی نشده',
+};
+
+const statusVariantMap = {
+  waiting: 'gray',
+  finalized: 'success',
+  'non-finalized': 'primary',
+};
 
 const PickedCoursesListItem = ({
   code,
@@ -7,6 +20,7 @@ const PickedCoursesListItem = ({
   instructor,
   units,
   onRemove,
+  status,
 }) => {
   return (
     <tr>
@@ -18,9 +32,9 @@ const PickedCoursesListItem = ({
         />
       </td>
       <td className="px-4">
-        <span className="info-box info-box--success info-box--outlined info-box--block">
-          ثبت شده
-        </span>
+        <InfoBox variant={statusVariantMap[status]} outlined block>
+          {statusTextMap[status]}
+        </InfoBox>
       </td>
       <td>
         {code}-{classCode}
