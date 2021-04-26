@@ -27,6 +27,7 @@ const CoursesTableListItem = ({
   formattedClassDate,
   examTimeStart,
   examTimeEnd,
+  prerequisiteNames,
 }) => {
   const isFull = capacity === registered;
   const icon = {
@@ -84,6 +85,7 @@ const CoursesTableListItem = ({
               formattedClassDate,
               examTimeStart,
               examTimeEnd,
+              prerequisiteNames,
             }}
           />
         </ReactTooltip>
