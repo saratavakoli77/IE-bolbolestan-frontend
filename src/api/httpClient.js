@@ -36,6 +36,13 @@ class HttpClient {
       .then(transformResponse)
       .catch(transformErrResponse);
   }
+
+  delete(endpoint, payload = {}, { sleep = 1 } = {}) {
+    return Promise.all([this.$http.delete(endpoint, payload), wait(sleep)])
+      .then(([res]) => res)
+      .then(transformResponse)
+      .catch(transformErrResponse);
+  }
 }
 
 export default new HttpClient();

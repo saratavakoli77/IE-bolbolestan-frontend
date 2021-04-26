@@ -12,11 +12,19 @@ const coursesModuleFactory = ({ $http }) => ({
   fetchPickedCourses() {
     return $http.get(PICKED_COURSES_ENDPOINT).then((res) => ({
       units: res.units,
-      courses: res.weeklyScheduleOfferings,
+      courses: res.weeklyScheduleOfferings.map(
+        ({ offeringData, offeringStatus }) => ({
+          ...offeringData,
+          status: offeringStatus,
+        })
+      ),
     }));
   },
   pickCourse(code, classCode) {
     return $http.post(PICK_COURSE_ENDPOINT(code, classCode));
+  },
+  removeCourse(code, classCode) {
+    return $http.delete(PICK_COURSE_ENDPOINT(code, classCode));
   },
   submitPickedCourses() {
     return $http.post(SUBMIT_PICKED_COURSES_ENDPOINT);
