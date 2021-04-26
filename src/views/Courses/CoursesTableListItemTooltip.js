@@ -1,4 +1,5 @@
 import { formatDate } from '@/utils/date';
+import { formatFaNumbers } from '@/utils/number';
 
 const mapEnDayToFa = {
   Saturday: 'شنبه',
@@ -18,7 +19,7 @@ const CoursesTableListItemTooltip = ({
 }) => {
   return (
     <div className="text-center flex-column justify-content-center align-items-center">
-      <p>{formattedClassDate}</p>
+      <p>{formatFaNumbers(formattedClassDate)}</p>
       <p>{classTimeDays.map((d) => mapEnDayToFa[d]).join(' - ')}</p>
       <hr />
       {(function () {
@@ -31,8 +32,8 @@ const CoursesTableListItemTooltip = ({
       ))}
       <b>امتحان</b>
       <p>
-        {formatDate(examTimeStart, 'HH:mm')}-{formatDate(examTimeEnd, 'HH:mm')}
-        <span className="ml-2">{formatDate(examTimeStart, 'YYYY/MM/DD')}</span>
+        {formatFaNumbers(formatDate(examTimeStart, 'HH:mm'))}-{formatFaNumbers(formatDate(examTimeEnd, 'HH:mm'))}
+        <span className="ml-2">{formatFaNumbers(formatDate(examTimeStart, 'YYYY/MM/DD'))}</span>
       </p>
     </div>
   );

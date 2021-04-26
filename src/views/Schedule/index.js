@@ -8,6 +8,7 @@ import ScheduleCourse from './ScheduleCourse';
 import ScheduleGridDays from './ScheduleGridDays';
 import ScheduleGridHours from './ScheduleGridHours';
 import './styles.scss';
+import { formatFaNumbers } from '@/utils/number';
 
 const Schedule = () => {
   const [courses, setCourses] = useState([]);
@@ -34,7 +35,7 @@ const Schedule = () => {
             برنامه هفتگی
           </p>
 
-          <p>ترم {term}</p>
+          <p>ترم {formatFaNumbers(term)}</p>
         </div>
 
         <div className="position-relative schedule__wrapper">

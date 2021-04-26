@@ -8,6 +8,7 @@ import { unwrapResult } from '@reduxjs/toolkit';
 import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { formatFaNumbers } from '@/utils/number';
 
 const PickedCoursesFooter = () => {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ const PickedCoursesFooter = () => {
   return (
     <div className="d-flex align-items-center justify-content-between">
       <p className="font-weight-bold text-primary-dark">
-        تعداد واحد ثبت شده: {pickedCoursesUnits}
+        تعداد واحد ثبت شده: {formatFaNumbers(pickedCoursesUnits)}
       </p>
 
       <div className="d-flex">

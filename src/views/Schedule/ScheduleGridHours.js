@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatFaNumbers } from '@/utils/number';
 
 const HOURS_RANGE = [...Array(11).keys()].map((h) => h + 7);
 
@@ -19,7 +20,7 @@ const ScheduleGridHours = () => {
           data-h-end={h + 1}
         >
           <p>
-            {ensureTwoDigits(h + 1)} - {ensureTwoDigits(h)}
+            {formatFaNumbers(ensureTwoDigits(h + 1))} - {formatFaNumbers(ensureTwoDigits(h))}
           </p>
         </div>
       ))}

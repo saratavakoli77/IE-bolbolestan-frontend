@@ -1,5 +1,6 @@
 import React from 'react';
 import { mapCourseTypeToLabel } from '../Courses/helpers';
+import { formatFaNumbers } from '@/utils/number';
 
 const ScheduleCourse = ({ name, classTime, weekDays, type }) => {
   const [start, end] = classTime.split('-');
@@ -15,7 +16,7 @@ const ScheduleCourse = ({ name, classTime, weekDays, type }) => {
           data-h-start={start.replace(/:00$/gi, '').replace(/^0/gi, '')}
           data-h-end={end.replace(/:00$/gi, '').replace(/^0/gi, '')}
         >
-          <p>{classTime}</p>
+          <p>{formatFaNumbers(classTime)}</p>
           <p>{name}</p>
           <p>{mapCourseTypeToLabel[type]}</p>
         </div>

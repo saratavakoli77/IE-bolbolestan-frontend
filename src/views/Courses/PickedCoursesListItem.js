@@ -1,5 +1,6 @@
 import AppIcon from '@/components/shared/AppIcon';
 import InfoBox from '@/components/shared/InfoBox';
+import { formatFaNumbers } from '@/utils/number';
 
 const statusTextMap = {
   waiting: 'در انتظار',
@@ -37,12 +38,12 @@ const PickedCoursesListItem = ({
         </InfoBox>
       </td>
       <td>
-        {code}-{classCode}
+        {formatFaNumbers(`${code}-${classCode}`)}
       </td>
       <td>{name}</td>
       <td>{instructor}</td>
       <td>
-        <span className="text-primary-dark font-weight-bold">{units}</span>
+        <span className="text-primary-dark font-weight-bold">{formatFaNumbers(units)}</span>
       </td>
     </tr>
   );

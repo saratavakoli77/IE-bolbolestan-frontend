@@ -1,4 +1,5 @@
 import './styles.scss';
+import { formatFaNumbers } from '@/utils/number';
 
 const LabeledBox = ({
   children,
@@ -8,7 +9,7 @@ const LabeledBox = ({
   footer: Footer,
 }) => (
   <div className={`labeled-box ${className}`}>
-    <p className="labeled-box__label">{label}</p>
+    <p className="labeled-box__label">{formatFaNumbers(label)}</p>
 
     {Header && (
       <div className="labeled-box__header">
