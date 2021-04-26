@@ -2,8 +2,9 @@
 ** BTN
 */
 .btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .btn:focus,

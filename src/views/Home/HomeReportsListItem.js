@@ -25,13 +25,13 @@ const HomeReportsListItem = ({ termNumber, courses }) => {
             <div className="report__cell">
               <span className="text-truncate">{c.name}</span>
             </div>
-            <div className="report__cell">{c.units} واحد</div>
+            <div className="report__cell">{c.unit} واحد</div>
             <div className="report__cell">
-              <span className="info-box info-box--block info-box--success">
+              <InfoBox variant="success" block>
                 {c.state}
-              </span>
+              </InfoBox>
             </div>
-            <div className="text-success">{c.grade}</div>
+            <div className="report__cell text-success">{c.grade}</div>
           </li>
         ))}
       </ol>

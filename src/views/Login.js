@@ -67,7 +67,7 @@ const Login = () => {
             <Button
               variant="primary"
               block
-              className="mt-5"
+              className="mt-5 text-center"
               type="submit"
               disabled={!isValid || loading}
             >

@@ -19,7 +19,7 @@ const LabeledBox = ({
     {children}
 
     {Footer && (
-      <div class="labeled-box__footer">
+      <div className="labeled-box__footer">
         <Footer />
       </div>
     )}

@@ -1,5 +1,5 @@
-const AppIcon = ({ icon, className = '' }) => {
-  return <i className={`flaticon-${icon} ${className}`}></i>;
+const AppIcon = ({ icon, className = '', onClick = () => {} }) => {
+  return <i className={`flaticon-${icon} ${className}`} onClick={onClick}></i>;
 };
 
 export default AppIcon;
