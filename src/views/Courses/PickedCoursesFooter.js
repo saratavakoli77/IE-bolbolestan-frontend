@@ -16,16 +16,18 @@ const PickedCoursesFooter = () => {
   );
   const { showLoading, hideLoading } = useContext(LoadingContext);
 
-  const submit = () => {
+  const submit = async () => {
     showLoading();
 
-    $api.courses
-      .submitPickedCourses()
-      .then(unwrapResult)
-      .then(dispatch(fetchPickedCourses()))
-      .then(() => toast.success('عملیات با موفقیت انجام شد'))
-      .catch(handleError)
-      .finally(() => hideLoading());
+    try {
+      await $api.courses.submitPickedCourses();
+      dispatch(fetchPickedCourses());
+      toast.success('عملیات با موفقیت انجام شد');
+    } catch (err) {
+      handleError(err);
+    } finally {
+      hideLoading();
+    }
   };
 
   const refresh = () => {
