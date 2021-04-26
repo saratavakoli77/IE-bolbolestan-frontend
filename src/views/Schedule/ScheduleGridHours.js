@@ -1,6 +1,12 @@
 import React from 'react';
 
-const HOURS_RANGE = [...Array(10).keys()].map((h) => h + 7);
+const HOURS_RANGE = [...Array(11).keys()].map((h) => h + 7);
+
+function ensureTwoDigits(input) {
+  const str = String(input);
+
+  return str.length < 2 ? `0${str}` : str;
+}
 
 const ScheduleGridHours = () => {
   return (
@@ -13,7 +19,7 @@ const ScheduleGridHours = () => {
           data-h-end={h + 1}
         >
           <p>
-            {h + 1} - {h}
+            {ensureTwoDigits(h + 1)} - {ensureTwoDigits(h)}
           </p>
         </div>
       ))}

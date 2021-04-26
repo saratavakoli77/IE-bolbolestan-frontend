@@ -1,6 +1,8 @@
 import $api from '@/api';
 import AppIcon from '@/components/shared/AppIcon';
+import LoadingContext from '@/contexts/loading';
 import { useState } from 'react';
+import { useContext } from 'react';
 import { useEffect } from 'react';
 import ScheduleCourse from './ScheduleCourse';
 import ScheduleGridDays from './ScheduleGridDays';
@@ -9,9 +11,11 @@ import './styles.scss';
 
 const Schedule = () => {
   const [courses, setCourses] = useState([]);
+  const { showLoading, hideLoading } = useContext(LoadingContext);
 
   useEffect(() => {
-    $api.courses.fetchSchedule().then(setCourses);
+    showLoading();
+    $api.courses.fetchSchedule().then(setCourses).then(hideLoading);
   }, []);
 
   return (
@@ -30,9 +34,11 @@ const Schedule = () => {
           <ScheduleGridDays />
 
           <div className="schedule__grid--main">
-            {courses.length &&
-              courses.map((c, i) => <ScheduleCourse key={i} {...c} />)}
-
+            {(function () {
+              if (courses.length) {
+                return courses.map((c, i) => <ScheduleCourse key={i} {...c} />);
+              }
+            })()}
             <ScheduleGridHours />
           </div>
         </div>
