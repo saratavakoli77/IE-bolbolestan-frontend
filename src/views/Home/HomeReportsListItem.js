@@ -38,7 +38,7 @@ const HomeReportsListItem = ({ termNumber, courses }) => {
 
       <div className="d-flex justify-content-end mt-3">
         <InfoBox variant="primary" outlined>
-          معدل: {average}
+          معدل: {average.toFixed(2)}
         </InfoBox>
       </div>
     </LabeledBox>
