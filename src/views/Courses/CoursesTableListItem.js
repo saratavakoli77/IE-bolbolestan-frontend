@@ -5,6 +5,7 @@ import { genIdForCourse, mapCourseTypeToLabel } from './helpers';
 import ReactTooltip from 'react-tooltip';
 import CoursesTableListItemTooltip from './CoursesTableListItemTooltip';
 import { useEffect } from 'react';
+import { formatFaNumbers } from '@/utils/number';
 
 const mapCourseTypeToInfoBoxVariant = {
   Asli: 'success-dark',
@@ -52,12 +53,10 @@ const CoursesTableListItem = ({
           <AppIcon icon={icon.icon} />
         </AppBtn>
       </td>
-      <td>
-        {code}-{classCode}
-      </td>
+      <td>{formatFaNumbers(`${code}-${classCode}`)}</td>
       <td>
         <span className="font-weight-bold">
-          {registered}/{capacity}
+          {formatFaNumbers(`${registered}/${capacity}`)}
         </span>
       </td>
       <td className="px-1">
@@ -72,7 +71,7 @@ const CoursesTableListItem = ({
       <td>{name}</td>
       <td>{instructor}</td>
       <td data-tip data-for={id} className="pointer">
-        {units}
+        {formatFaNumbers(units)}
 
         <ReactTooltip
           className="CoursesTableListItem__tooltip"
