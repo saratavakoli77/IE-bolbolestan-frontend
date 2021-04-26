@@ -30,7 +30,10 @@ const coursesModuleFactory = ({ $http }) => ({
     return $http.post(SUBMIT_PICKED_COURSES_ENDPOINT);
   },
   fetchSchedule() {
-    return $http.get(SCHEDULE_ENDPOINT).then((res) => res.data);
+    return $http.get(SCHEDULE_ENDPOINT).then((res) => ({
+      courses: res.data,
+      term: res.term,
+    }));
   },
 });
 

@@ -11,11 +11,18 @@ import './styles.scss';
 
 const Schedule = () => {
   const [courses, setCourses] = useState([]);
+  const [term, setTerm] = useState('');
   const { showLoading, hideLoading } = useContext(LoadingContext);
 
   useEffect(() => {
     showLoading();
-    $api.courses.fetchSchedule().then(setCourses).then(hideLoading);
+    $api.courses
+      .fetchSchedule()
+      .then(({ term, courses }) => {
+        setTerm(term);
+        setCourses(courses);
+      })
+      .then(hideLoading);
   }, []);
 
   return (
@@ -27,7 +34,7 @@ const Schedule = () => {
             برنامه هفتگی
           </p>
 
-          <p>ترم ۶</p>
+          <p>ترم {term}</p>
         </div>
 
         <div className="position-relative schedule__wrapper">
