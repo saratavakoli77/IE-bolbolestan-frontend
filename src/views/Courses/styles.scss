@@ -147,4 +147,21 @@
 
 .all-courses-table tbody tr:hover td:nth-child(7) {
   border-left-color: var(--color-primary);
+  border-left-width: 2px;
+}
+
+.CoursesTableListItem__tooltip {
+  background: #fff !important;
+  border: 1px solid var(--color-gray) !important;
+  color: var(--color-gray) !important;
+  text-align: center !important;
+  padding: 5px !important;
+
+  p {
+    text-align: center !important;
+  }
+
+  &::after {
+    border-left-color: var(--color-gray) !important;
+  }
 }

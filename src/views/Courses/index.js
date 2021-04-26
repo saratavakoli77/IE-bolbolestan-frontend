@@ -1,30 +1,28 @@
 import $api from '@/api';
 import { setCourses } from '@/store/slices/coursesSlice';
-import { useState } from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import CoursesTable from './CoursesTable';
 import SearchCourses from './SearchCourses';
 import PickedCourses from './PickedCourses';
 import './styles.scss';
+import { useContext } from 'react';
+import LoadingContext from '@/contexts/loading';
 
 const Courses = () => {
-  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const { showLoading, hideLoading } = useContext(LoadingContext);
+
   const fetchData = () => {
-    setLoading(true);
+    showLoading();
 
     $api.courses.fetchAllCourses().then((courses) => {
       dispatch(setCourses(courses));
-      setLoading(false);
+      hideLoading();
     });
   };
 
   useEffect(fetchData, []);
-
-  if (loading) {
-    return <div></div>;
-  }
 
   return (
     <div className="container py-5">

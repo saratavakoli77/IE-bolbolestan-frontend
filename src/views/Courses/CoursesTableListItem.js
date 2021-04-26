@@ -1,7 +1,10 @@
 import AppBtn from '@/components/shared/AppBtn';
 import AppIcon from '@/components/shared/AppIcon';
 import InfoBox from '@/components/shared/InfoBox';
-import { mapCourseTypeToLabel } from './helpers';
+import { genIdForCourse, mapCourseTypeToLabel } from './helpers';
+import ReactTooltip from 'react-tooltip';
+import CoursesListItemTooltip from './CoursesListItemTooltip';
+import { useEffect } from 'react';
 
 const mapCourseTypeToInfoBoxVariant = {
   Asli: 'success',
@@ -20,12 +23,19 @@ const CoursesTableListItem = ({
   registered,
   type,
   onPick,
+  classTimeDays,
+  formattedClassDate,
 }) => {
   const isFull = capacity === registered;
   const icon = {
     variant: isFull ? 'gray' : 'success-dark',
     icon: isFull ? 'clock-circular-outline' : 'add',
   };
+  const id = genIdForCourse({ code, classCode });
+
+  useEffect(() => {
+    ReactTooltip.rebuild();
+  });
 
   return (
     <tr>
@@ -58,7 +68,17 @@ const CoursesTableListItem = ({
       </td>
       <td>{name}</td>
       <td>{instructor}</td>
-      <td>{units}</td>
+      <td data-tip data-for={id} className="pointer">
+        {units}
+
+        <ReactTooltip
+          className="CoursesTableListItem__tooltip"
+          id={id}
+          place="left"
+        >
+          <CoursesListItemTooltip {...{ classTimeDays, formattedClassDate }} />
+        </ReactTooltip>
+      </td>
       <td></td>
     </tr>
   );
