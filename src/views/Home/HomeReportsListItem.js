@@ -4,6 +4,11 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { formatFaNumbers } from '@/utils/number';
 
+const courseVariantMap = {
+  "مردود": "danger",
+  "قبول": "success"
+}
+
 const HomeReportsListItem = ({ termNumber, courses }) => {
   const [average, setAverage] = useState(0);
 
@@ -28,7 +33,7 @@ const HomeReportsListItem = ({ termNumber, courses }) => {
             </div>
             <div className="report__cell">{formatFaNumbers(c.unit)} واحد</div>
             <div className="report__cell">
-              <InfoBox variant="success" block>
+              <InfoBox variant={courseVariantMap[c.state]} block>
                 {c.state}
               </InfoBox>
             </div>

@@ -32,7 +32,7 @@ export const coursesSlice = createSlice({
   },
   extraReducers: {
     [fetchPickedCourses.fulfilled]: (state, action) => {
-      state.pickedCourses = action.payload.courses;
+      state.pickedCourses = action.payload.courses.filter(c => c.code);
       state.pickedCoursesUnits = action.payload.units;
     },
   },
