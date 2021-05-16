@@ -5,6 +5,7 @@ const PROFILE_ENDPOINT = 'profile';
 const LOGOUT_ENDPOINT = 'logout';
 const REGISTER_ENDPOINT = 'signup';
 const FORGOT_PASSWORD_ENDPOINT = 'forgot-password';
+const CHANGE_PASSWORD_ENDPOINT = (token) => `change-password?token=${token}`;
 
 const authModuleFactory = ({ $http }) => ({
   login(email, password) {
@@ -48,6 +49,9 @@ const authModuleFactory = ({ $http }) => ({
   },
   forgotPassword(email) {
     return $http.post(FORGOT_PASSWORD_ENDPOINT, { email });
+  },
+  changePassword(newPassword, token) {
+    return $http.post(CHANGE_PASSWORD_ENDPOINT(token), { newPassword });
   },
 });
 
