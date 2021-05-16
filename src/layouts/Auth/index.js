@@ -5,7 +5,7 @@ import './styles.scss';
 const AuthLayout = ({ children }) => {
   return (
     <div className="AuthLayout">
-      <Card style={{ width: '25rem' }}>
+      <Card style={{ width: '32rem' }}>
         <Card.Body>{children}</Card.Body>
       </Card>
       <Footer />
