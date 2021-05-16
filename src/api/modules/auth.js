@@ -1,19 +1,26 @@
+import storage from '@/utils/storage';
+
 const LOGIN_ENDPOINT = 'login';
 const PROFILE_ENDPOINT = 'profile';
 const LOGOUT_ENDPOINT = 'logout';
 const REGISTER_ENDPOINT = 'signup';
 
 const authModuleFactory = ({ $http }) => ({
-  login(id) {
-    return $http.post(LOGIN_ENDPOINT, {
-      studentId: id,
-    });
+  login(email, password) {
+    return $http
+      .post(LOGIN_ENDPOINT, {
+        email,
+        password,
+      })
+      .then(({ jwt }) => storage.setItem('bolbolestan-token', jwt));
   },
   fetchProfile() {
     return $http.get(PROFILE_ENDPOINT);
   },
   logout() {
-    return $http.post(LOGOUT_ENDPOINT);
+    return $http
+      .post(LOGOUT_ENDPOINT)
+      .then(() => storage.removeItem('bolbolestan-token'));
   },
   register({
     firstName,

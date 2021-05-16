@@ -1,3 +1,4 @@
+import storage from '@/utils/storage';
 import wait from '@/utils/wait';
 import axios from 'axios';
 
@@ -14,6 +15,18 @@ function transformResponse(res) {
   return res.data || {};
 }
 
+function generateOptions() {
+  if (storage.getItem('bolbolestan-token')) {
+    return {
+      headers: {
+        authorization: storage.getItem('bolbolestan-token'),
+      },
+    };
+  }
+
+  return {};
+}
+
 const API_BASE_URL = 'http://localhost:8081';
 
 class HttpClient {
@@ -24,21 +37,30 @@ class HttpClient {
   }
 
   get(endpoint, { sleep = 1 } = {}) {
-    return Promise.all([this.$http.get(endpoint), wait(sleep)])
+    return Promise.all([
+      this.$http.get(endpoint, generateOptions()),
+      wait(sleep),
+    ])
       .then(([res]) => res)
       .then(transformResponse)
       .catch(transformErrResponse);
   }
 
   post(endpoint, payload = {}, { sleep = 1 } = {}) {
-    return Promise.all([this.$http.post(endpoint, payload), wait(sleep)])
+    return Promise.all([
+      this.$http.post(endpoint, payload, generateOptions()),
+      wait(sleep),
+    ])
       .then(([res]) => res)
       .then(transformResponse)
       .catch(transformErrResponse);
   }
 
   delete(endpoint, payload = {}, { sleep = 1 } = {}) {
-    return Promise.all([this.$http.delete(endpoint, payload), wait(sleep)])
+    return Promise.all([
+      this.$http.delete(endpoint, payload, generateOptions()),
+      wait(sleep),
+    ])
       .then(([res]) => res)
       .then(transformResponse)
       .catch(transformErrResponse);

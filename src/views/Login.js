@@ -12,7 +12,8 @@ import { useDispatch } from 'react-redux';
 import AppInput from '@/components/shared/AppInput';
 
 const formSchema = yup.object().shape({
-  studentId: yup.number().required(),
+  email: yup.string().email().required(),
+  password: yup.string().required(),
 });
 
 const Login = () => {
@@ -20,11 +21,11 @@ const Login = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const onSubmit = async ({ studentId }) => {
+  const onSubmit = async ({ email, password }) => {
     setLoading(true);
 
     try {
-      await $api.auth.login(studentId);
+      await $api.auth.login(email, password);
       const { student, gpa, tpu, courses } = await $api.auth.fetchProfile();
       dispatch(setUser({ ...student, gpa, tpu, courses }));
       history.push('/');
@@ -41,7 +42,7 @@ const Login = () => {
       <Formik
         validationSchema={formSchema}
         initialValues={{
-          studentId: '',
+          email: '',
           password: '',
         }}
         onSubmit={onSubmit}
@@ -49,12 +50,12 @@ const Login = () => {
         {({ handleSubmit, handleChange, values, touched, errors, isValid }) => (
           <Form noValidate onSubmit={handleSubmit}>
             <AppInput
-              name="studentId"
-              placeholder="شماره دانشجویی خود را وارد کنید"
-              value={values.studentId}
+              name="email"
+              placeholder="ایمیل خود را وارد کنید"
+              value={values.email}
               onChange={handleChange}
-              isValid={touched.studentId && !errors.studentId}
-              isInvalid={touched.studentId && !!errors.studentId}
+              isValid={touched.email && !errors.email}
+              isInvalid={touched.email && !!errors.email}
               errMessage="این فیلد اجباری می‌باشد"
             />
             <AppInput
@@ -63,6 +64,9 @@ const Login = () => {
               placeholder="رمز عبور خود را وارد کنید"
               value={values.password}
               onChange={handleChange}
+              isValid={touched.password && !errors.password}
+              isInvalid={touched.password && !!errors.password}
+              errMessage="این فیلد اجباری می‌باشد"
             />
             <Button
               variant="primary"
