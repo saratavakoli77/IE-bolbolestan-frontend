@@ -4,6 +4,7 @@ const LOGIN_ENDPOINT = 'login';
 const PROFILE_ENDPOINT = 'profile';
 const LOGOUT_ENDPOINT = 'logout';
 const REGISTER_ENDPOINT = 'signup';
+const FORGOT_PASSWORD_ENDPOINT = 'forgot-password';
 
 const authModuleFactory = ({ $http }) => ({
   login(email, password) {
@@ -44,6 +45,9 @@ const authModuleFactory = ({ $http }) => ({
       email,
       password,
     });
+  },
+  forgotPassword(email) {
+    return $http.post(FORGOT_PASSWORD_ENDPOINT, { email });
   },
 });
 
