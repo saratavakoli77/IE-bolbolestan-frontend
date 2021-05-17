@@ -1,8 +1,18 @@
+import storage from '@/utils/storage';
 import wait from '@/utils/wait';
 import axios from 'axios';
 
-function transformErrResponse(err) {
-  const { message } = err.response?.data || {};
+function transformErrResponse(err, leaveOnExpire) {
+  let { message } = err.response?.data || {};
+  if (leaveOnExpire && err.response?.status === 401) {
+    message = "توکن نامعتبر است."
+    setTimeout(() => {
+      storage.removeItem('bolbolestan-token');
+      storage.removeItem('user');
+      // eslint-disable-next-line
+      location.reload();
+    }, 1000);
+  }
 
   return Promise.reject({
     ...(err.response?.data || {}),
@@ -14,6 +24,18 @@ function transformResponse(res) {
   return res.data || {};
 }
 
+function generateOptions() {
+  if (storage.getItem('bolbolestan-token')) {
+    return {
+      headers: {
+        authorization: storage.getItem('bolbolestan-token'),
+      },
+    };
+  }
+
+  return {};
+}
+
 const API_BASE_URL = 'http://localhost:8081';
 
 class HttpClient {
@@ -23,25 +45,34 @@ class HttpClient {
     });
   }
 
-  get(endpoint, { sleep = 1 } = {}) {
-    return Promise.all([this.$http.get(endpoint), wait(sleep)])
+  get(endpoint, { sleep = 1, leaveOnExpire = true } = {}) {
+    return Promise.all([
+      this.$http.get(endpoint, generateOptions()),
+      wait(sleep),
+    ])
       .then(([res]) => res)
       .then(transformResponse)
-      .catch(transformErrResponse);
+      .catch((err) => transformErrResponse(err, leaveOnExpire));
   }
 
-  post(endpoint, payload = {}, { sleep = 1 } = {}) {
-    return Promise.all([this.$http.post(endpoint, payload), wait(sleep)])
+  post(endpoint, payload = {}, { sleep = 1, leaveOnExpire = true } = {}) {
+    return Promise.all([
+      this.$http.post(endpoint, payload, generateOptions()),
+      wait(sleep),
+    ])
       .then(([res]) => res)
       .then(transformResponse)
-      .catch(transformErrResponse);
+      .catch((err) => transformErrResponse(err, leaveOnExpire));
   }
 
-  delete(endpoint, payload = {}, { sleep = 1 } = {}) {
-    return Promise.all([this.$http.delete(endpoint, payload), wait(sleep)])
+  delete(endpoint, { sleep = 1, leaveOnExpire = true } = {}) {
+    return Promise.all([
+      this.$http.delete(endpoint, generateOptions()),
+      wait(sleep),
+    ])
       .then(([res]) => res)
       .then(transformResponse)
-      .catch(transformErrResponse);
+      .catch((err) => transformErrResponse(err, leaveOnExpire));
   }
 }
 

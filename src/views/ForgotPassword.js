@@ -2,33 +2,28 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import $api from '@/api';
+import AppInput from '@/components/shared/AppInput';
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import Spinner from 'react-bootstrap/Spinner';
-import { toast } from 'react-toastify';
-import { setUser } from '@/store/slices/userSlice';
-import { Link, useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import AppInput from '@/components/shared/AppInput';
+import $api from '@/api';
 
 const formSchema = yup.object().shape({
   email: yup.string().email().required(),
-  password: yup.string().required(),
 });
 
-const Login = () => {
+const ForgotPassword = () => {
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
   const history = useHistory();
 
-  const onSubmit = async ({ email, password }) => {
+  const onSubmit = async ({ email }) => {
     setLoading(true);
 
     try {
-      await $api.auth.login(email, password);
-      const { student, gpa, tpu, courses } = await $api.auth.fetchProfile();
-      dispatch(setUser({ ...student, gpa, tpu, courses }));
-      history.push('/');
+      await $api.auth.forgotPassword(email);
+      toast.success('ایمیل تغییر رمز عبور برای شما ارسال شد');
+      history.push('/login');
     } catch (err) {
       toast.error(err.message);
       setLoading(false);
@@ -37,13 +32,12 @@ const Login = () => {
 
   return (
     <main>
-      <h4 className="mb-4 font-weight-bold">ورود به حساب کاربری</h4>
+      <h4 className="mb-4 font-weight-bold">فراموشی رمز عبور</h4>
 
       <Formik
         validationSchema={formSchema}
         initialValues={{
           email: '',
-          password: '',
         }}
         onSubmit={onSubmit}
       >
@@ -58,16 +52,7 @@ const Login = () => {
               isInvalid={touched.email && !!errors.email}
               errMessage="این فیلد اجباری می‌باشد"
             />
-            <AppInput
-              name="password"
-              type="password"
-              placeholder="رمز عبور خود را وارد کنید"
-              value={values.password}
-              onChange={handleChange}
-              isValid={touched.password && !errors.password}
-              isInvalid={touched.password && !!errors.password}
-              errMessage="این فیلد اجباری می‌باشد"
-            />
+
             <Button
               variant="primary"
               block
@@ -84,21 +69,14 @@ const Login = () => {
                   aria-hidden="true"
                 />
               ) : (
-                'ورود'
+                'تایید'
               )}
             </Button>
           </Form>
         )}
       </Formik>
-
-      <div className="text-center mt-3">
-        <div className="text-center mb-1">
-          <Link to="/register">ایجاد حساب کاربری</Link>
-        </div>
-        <Link to="/forgot-password">فراموشی رمز عبور</Link>
-      </div>
     </main>
   );
 };
 
-export default Login;
+export default ForgotPassword;

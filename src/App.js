@@ -10,6 +10,8 @@ import Login from '@/views/Login';
 import Register from '@/views/Register';
 import Home from '@/views/Home';
 import Courses from '@/views/Courses';
+import ForgotPassword from '@/views/ForgotPassword';
+import ChangePassword from '@/views/ChangePassword';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -41,6 +43,20 @@ function App() {
                 component={Register}
                 layout="auth"
                 title="ثبت نام"
+                meta={{ guest: true }}
+              />
+              <LayoutResolver
+                path="/forgot-password"
+                component={ForgotPassword}
+                layout="auth"
+                title="فراموشی رمز عبور"
+                meta={{ guest: true }}
+              />
+              <LayoutResolver
+                path="/change-password"
+                component={ChangePassword}
+                layout="auth"
+                title="تغییر رمز عبور"
                 meta={{ guest: true }}
               />
               <LayoutResolver
