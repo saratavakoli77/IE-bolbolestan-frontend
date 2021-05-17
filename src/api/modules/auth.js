@@ -10,10 +10,14 @@ const CHANGE_PASSWORD_ENDPOINT = (token) => `change-password?token=${token}`;
 const authModuleFactory = ({ $http }) => ({
   login(email, password) {
     return $http
-      .post(LOGIN_ENDPOINT, {
-        email,
-        password,
-      })
+      .post(
+        LOGIN_ENDPOINT,
+        {
+          email,
+          password,
+        },
+        { leaveOnExpire: false }
+      )
       .then(({ jwt }) => storage.setItem('bolbolestan-token', jwt));
   },
   fetchProfile() {
@@ -21,7 +25,7 @@ const authModuleFactory = ({ $http }) => ({
   },
   logout() {
     return $http
-      .post(LOGOUT_ENDPOINT)
+      .post(LOGOUT_ENDPOINT, { leaveOnExpire: false })
       .then(() => storage.removeItem('bolbolestan-token'));
   },
   register({
@@ -35,23 +39,35 @@ const authModuleFactory = ({ $http }) => ({
     email,
     password,
   }) {
-    return $http.post(REGISTER_ENDPOINT, {
-      id: studentId,
-      name: firstName,
-      secondName: lastName,
-      birthDate: birthDate,
-      field,
-      faculty,
-      level,
-      email,
-      password,
-    });
+    return $http.post(
+      REGISTER_ENDPOINT,
+      {
+        id: studentId,
+        name: firstName,
+        secondName: lastName,
+        birthDate: birthDate,
+        field,
+        faculty,
+        level,
+        email,
+        password,
+      },
+      { leaveOnExpire: false }
+    );
   },
   forgotPassword(email) {
-    return $http.post(FORGOT_PASSWORD_ENDPOINT, { email });
+    return $http.post(
+      FORGOT_PASSWORD_ENDPOINT,
+      { email },
+      { leaveOnExpire: false }
+    );
   },
   changePassword(newPassword, token) {
-    return $http.post(CHANGE_PASSWORD_ENDPOINT(token), { newPassword });
+    return $http.post(
+      CHANGE_PASSWORD_ENDPOINT(token),
+      { newPassword },
+      { leaveOnExpire: false }
+    );
   },
 });
 

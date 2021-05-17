@@ -2,8 +2,16 @@ import storage from '@/utils/storage';
 import wait from '@/utils/wait';
 import axios from 'axios';
 
-function transformErrResponse(err) {
-  const { message } = err.response?.data || {};
+function transformErrResponse(err, leaveOnExpire) {
+  const { message, status } = err.response?.data || {};
+
+  if (status === 'expired') {
+    setTimeout(() => {
+      storage.removeItem('bolbolestan-token');
+      // eslint-disable-next-line
+      location.reload();
+    }, 1000);
+  }
 
   return Promise.reject({
     ...(err.response?.data || {}),
@@ -36,34 +44,36 @@ class HttpClient {
     });
   }
 
-  get(endpoint, { sleep = 1 } = {}) {
+  get(endpoint, { sleep = 1, leaveOnExpire = true } = {}) {
     return Promise.all([
       this.$http.get(endpoint, generateOptions()),
       wait(sleep),
     ])
       .then(([res]) => res)
       .then(transformResponse)
-      .catch(transformErrResponse);
+      .catch((err) => transformErrResponse(err, leaveOnExpire));
   }
 
-  post(endpoint, payload = {}, { sleep = 1 } = {}) {
+  post(endpoint, payload = {}, { sleep = 1, leaveOnExpire = true } = {}) {
     return Promise.all([
       this.$http.post(endpoint, payload, generateOptions()),
       wait(sleep),
     ])
       .then(([res]) => res)
       .then(transformResponse)
-      .catch(transformErrResponse);
+      .catch(transformErrResponse)
+      .catch((err) => transformErrResponse(err, leaveOnExpire));
   }
 
-  delete(endpoint, payload = {}, { sleep = 1 } = {}) {
+  delete(endpoint, payload = {}, { sleep = 1, leaveOnExpire = true } = {}) {
     return Promise.all([
       this.$http.delete(endpoint, payload, generateOptions()),
       wait(sleep),
     ])
       .then(([res]) => res)
       .then(transformResponse)
-      .catch(transformErrResponse);
+      .catch(transformErrResponse)
+      .catch((err) => transformErrResponse(err, leaveOnExpire));
   }
 }
 
