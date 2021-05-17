@@ -3,11 +3,12 @@ import wait from '@/utils/wait';
 import axios from 'axios';
 
 function transformErrResponse(err, leaveOnExpire) {
-  const { message, status } = err.response?.data || {};
-
-  if (status === 'expired') {
+  let { message } = err.response?.data || {};
+  if (leaveOnExpire && err.response?.status === 401) {
+    message = "توکن نامعتبر است."
     setTimeout(() => {
       storage.removeItem('bolbolestan-token');
+      storage.removeItem('user');
       // eslint-disable-next-line
       location.reload();
     }, 1000);
@@ -61,18 +62,16 @@ class HttpClient {
     ])
       .then(([res]) => res)
       .then(transformResponse)
-      .catch(transformErrResponse)
       .catch((err) => transformErrResponse(err, leaveOnExpire));
   }
 
-  delete(endpoint, payload = {}, { sleep = 1, leaveOnExpire = true } = {}) {
+  delete(endpoint, { sleep = 1, leaveOnExpire = true } = {}) {
     return Promise.all([
-      this.$http.delete(endpoint, payload, generateOptions()),
+      this.$http.delete(endpoint, generateOptions()),
       wait(sleep),
     ])
       .then(([res]) => res)
       .then(transformResponse)
-      .catch(transformErrResponse)
       .catch((err) => transformErrResponse(err, leaveOnExpire));
   }
 }
