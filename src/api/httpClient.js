@@ -36,7 +36,7 @@ function generateOptions() {
   return {};
 }
 
-const API_BASE_URL = 'http://localhost:8081';
+const API_BASE_URL = 'http://87.247.185.122:32766/';
 
 class HttpClient {
   constructor() {
