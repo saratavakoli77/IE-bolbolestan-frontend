@@ -10,7 +10,7 @@ stages:
 build:
   image: docker
   stage: build
-  befor_script:
+  before_script:
     - docker login us $REGISTRY_USERNAME -p $REGISTRY_PASSWORD quay.io
   script:
     - docker build ./ -t quay.io/ghminaei/ie_frontend:$CI_BUILD_RF
